@@ -96,6 +96,33 @@ For building and running the application you need:
 ## 아키텍쳐
 
 ### 디렉토리 구조
+```
+src/
+├── app/                   # 어플리케이션 레이어 (글로벌 설정, 라우팅)
+│   ├── providers/         # 글로벌 Provider (React Query, Zustand 등)
+│   ├── routes/            # Page Router
+│   ├── styles/            # 글로벌 스타일
+│   
+├── entities/              # 주요 엔티티 (도메인 모델)
+│   └── user/              # 유저 관련 기능 (User Entity)
+├── features/              # 독립적인 기능들
+│   ├── file-upload/       # 파일 업로드 기능
+│   ├── music-conversion/  # 음악-악보 변환 기능
+│   └── notifications/     # 알림 관련 기능
+├── pages/                 # Next.js Page Router
+│   ├── upload.tsx         # 업로드 페이지
+│   ├── result.tsx         # 결과 페이지
+│   └── index.tsx          # 홈 페이지
+├── shared/                # 공용 코드
+│   ├── api/               # API 클라이언트
+│   ├── config/            # 환경 설정 (env, API URL)
+│   ├── libs/              # 라이브러리 (유틸 함수)
+│   ├── ui/                # 공용 UI 컴포넌트 (Button, Input 등)
+│   └── utils/             # 범용 유틸리티
+└── widgets/               # 복합 UI 위젯
+    ├── header/            # 헤더
+    └── footer/            # 푸터 
+```
 
 <!--
 ```bash
