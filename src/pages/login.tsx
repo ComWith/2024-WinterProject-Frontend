@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import style from "./login.module.css";
 import { useState } from "react";
 import axios from "axios";
+import { useAuthStore } from "@/\bentities/user/authStore";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ export default function Login() {
     password: "",
   });
   const [error, setError] = useState("");
+  const setUser = useAuthStore((state) => state.setUser); // Zustand의 setUser 함수
   const router = useRouter();
   const onHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -29,6 +31,7 @@ export default function Login() {
 
       // 로그인 성공 시 상태 저장 및 리다이렉트
       localStorage.setItem("user", JSON.stringify(response.data));
+      setUser({ nickname: formData.nickname });
       alert("로그인 성공!");
       router.push("/"); // 홈페이지로 이동
     } catch (error: unknown) {
