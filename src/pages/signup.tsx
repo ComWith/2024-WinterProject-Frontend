@@ -1,6 +1,7 @@
 import axios from "axios";
 import style from "./signup.module.css";
 import { useState } from "react";
+import { useAuthStore } from "../entities/user/authStore";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
@@ -10,24 +11,27 @@ export default function SignUp() {
 
   const [error, setError] = useState("");
 
+  // Zustand 상태 업데이트 함수 가져오기
+  const setUser = useAuthStore((state) => state.setUser);
+
   const onHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    console.log(name, value);
     setFormData({ ...formData, [name]: value });
   };
 
   const onHandleSignUp = async () => {
     if (!formData.nickname || !formData.password) {
-      console.log(formData);
       setError("닉네임과 비밀번호를 입력해주세요.");
       return;
     }
     try {
-      // 나중에 요청 방법 명확해지면 shared 폴더에 로직 옮길 것
       const response = await axios.post("/user", {
         nickname: formData.nickname,
         password: formData.password,
       });
+
+      // 회원가입 성공 시 Zustand에 사용자 정보 저장
+      setUser({ nickname: formData.nickname });
       alert("회원가입 성공!");
       console.log(response.data);
     } catch (error: unknown) {
@@ -38,6 +42,7 @@ export default function SignUp() {
       }
     }
   };
+
   return (
     <div className={style.container}>
       <section>
