@@ -2,6 +2,7 @@ import axios from "axios";
 import style from "./signup.module.css";
 import { useState } from "react";
 import { useAuthStore } from "../entities/user/authStore";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
@@ -10,6 +11,8 @@ export default function SignUp() {
   });
 
   const [error, setError] = useState("");
+
+  const navigate = useNavigate();
 
   // Zustand 상태 업데이트 함수 가져오기
   const setUser = useAuthStore((state) => state.setUser);
@@ -33,6 +36,7 @@ export default function SignUp() {
       // 회원가입 성공 시 Zustand에 사용자 정보 저장
       setUser({ nickname: formData.nickname });
       alert("회원가입 성공!");
+      navigate("/");
       console.log(response.data);
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
