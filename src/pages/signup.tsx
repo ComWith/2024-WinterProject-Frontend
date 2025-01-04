@@ -28,7 +28,7 @@ export default function SignUp() {
       return;
     }
     try {
-      const response = await axios.post("/user", {
+      const response = await axios.post("/users", {
         nickname: formData.nickname,
         password: formData.password,
       });
