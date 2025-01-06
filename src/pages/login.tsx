@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import style from "./login.module.css";
 import { useState } from "react";
 import axios from "axios";
-import { useAuthStore } from "@/\bentities/user/authStore";
+import { useAuthStore } from "../entities/user/authStore";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -24,7 +24,7 @@ export default function Login() {
     }
 
     try {
-      const response = await axios.post("/users/login", {
+      const response = await axios.post("/api/login", {
         nickname: formData.nickname,
         password: formData.password,
       });
