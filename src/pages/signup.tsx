@@ -36,7 +36,7 @@ export default function SignUp() {
       // 회원가입 성공 시 Zustand에 사용자 정보 저장
       setUser({ nickname: formData.nickname });
       alert("회원가입 성공!");
-      router.push("/");
+      router.push("/home");
       console.log(response.data);
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
