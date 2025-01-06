@@ -5,7 +5,7 @@ interface User {
   password: string;
 }
 
-const users: User[] = []; // 간단한 메모리 기반 사용자 저장소
+export const users: User[] = []; // 간단한 메모리 기반 사용자 저장소
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   console.log("Request received:", req.method, req.url);
