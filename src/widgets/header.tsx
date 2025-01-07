@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useAuthStore } from "../entities/user/authStore";
+import { useAuthStore } from "@/authStore";
 import style from "./header.module.css";
 
 export default function NavigationBar() {

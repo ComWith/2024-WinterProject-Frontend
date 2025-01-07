@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useAuthStore } from "../entities/user/authStore";
+import { useAuthStore } from "@/authStore";
 import { useRouter } from "next/router";
 import NavigationBar from "@/widgets/header";
 

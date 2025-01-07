@@ -1,7 +1,7 @@
 import axios from "axios";
-import style from "./signup.module.css";
+import style from "@/styles/signup.module.css";
 import { useState } from "react";
-import { useAuthStore } from "../entities/user/authStore";
+import { useAuthStore } from "@/authStore";
 import { useRouter } from "next/router";
 
 export default function SignUp() {
@@ -46,6 +46,11 @@ export default function SignUp() {
       }
     }
   };
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      onHandleSignUp();
+    }
+  };
 
   return (
     <div className={style.container}>
@@ -64,11 +69,10 @@ export default function SignUp() {
             onChange={onHandleChange}
           />
         </div>
-      </section>
-      <section>
         <div>
           <h3 className={style.input_text}>Password</h3>
           <input
+            onKeyDown={onKeyDown}
             type="password"
             name="password"
             placeholder="비밀번호를 정해주세요..."

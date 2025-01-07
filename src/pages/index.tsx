@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
-import style from "./login.module.css";
+import style from "@/styles/index.module.css";
 import { useState } from "react";
 import axios from "axios";
-import { useAuthStore } from "../entities/user/authStore";
+import { useAuthStore } from "@/authStore";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -46,6 +46,12 @@ export default function Login() {
     router.push("/signup");
   };
 
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      onHandleLogin();
+    }
+  };
+
   return (
     <div className={style.container}>
       <section>
@@ -63,13 +69,12 @@ export default function Login() {
             onChange={onHandleChange}
           />
         </div>
-      </section>
-      <section>
         <div>
           <h3 className={style.input_text}>Password</h3>
           <input
             type="password"
             name="password"
+            onKeyDown={onKeyDown}
             placeholder="비밀번호를 입력해주세요..."
             className={style.input_data}
             value={formData.password}
