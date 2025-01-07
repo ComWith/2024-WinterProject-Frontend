@@ -16,7 +16,7 @@ export default function NavigationBar() {
 
   return (
     <nav className={style.navigation}>
-      <h1 className={style.logo} onClick={() => router.push("/")}>
+      <h1 className={style.logo} onClick={() => router.push("/home")}>
         웹서비스 이름
       </h1>
 
