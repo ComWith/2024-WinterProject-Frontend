@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import style from "./login.module.css";
 import { useState } from "react";
 import axios from "axios";
-import { useAuthStore } from "../entities/user/authStore";
+import { useAuthStore } from "@/authStore";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -31,7 +31,10 @@ export default function Login() {
 
       // 로그인 성공 시 상태 저장 및 리다이렉트
       localStorage.setItem("user", JSON.stringify(response.data));
-      setUser({ nickname: formData.nickname });
+      setUser({
+        nickname: formData.nickname,
+        profileImage: "/default-profile.png", // 기본 프로필 이미지 설정
+      });
       alert("로그인 성공!");
       router.push("/home"); // 홈페이지로 이동
     } catch (error: unknown) {
