@@ -1,9 +1,14 @@
 import { create } from "zustand";
 
+interface User {
+  id: string; // 사용자 ID 추가
+  nickname: string;
+}
+
 interface AuthState {
-  user: { nickname: string } | null;
+  user: User | null; // User 타입 사용
   isLoggedIn: boolean;
-  setUser: (user: { nickname: string }) => void;
+  setUser: (user: User) => void; // User 타입 사용
   logout: () => void;
 }
 
