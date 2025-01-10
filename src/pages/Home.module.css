@@ -1,0 +1,256 @@
+/* General Section Styles */
+.section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 170px;
+  gap: 60px;
+  isolation: isolate;
+  position: absolute;
+  width: auto;
+  height: auto;
+  left: 1px;
+  top: 81px;
+}
+
+/* Image Container */
+.image_container {
+  position: relative;
+  width: 1100px;
+  height: 292px;
+  background: rgba(217, 217, 217, 0.5);
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.image_container > .text {
+  justify-content: center;
+  position: absolute;
+  height: 16px;
+  left: 16px;
+  right: 16px;
+  top: calc(50% - 16px / 2);
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #000000;
+}
+.image_container > .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+/* Section 2 Styles */
+.section2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 170px;
+  gap: 60px;
+  isolation: isolate;
+  position: absolute;
+  width: auto;
+  height: auto;
+  left: 1px;
+  top: 501px;
+}
+
+/* Right Side */
+.right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 10px;
+  font-weight: bold;
+  width: 520px;
+  height: 30px;
+  flex: none;
+  order: 1;
+  flex-grow: 1;
+  z-index: 1;
+}
+.right > .row1 {
+  width: 520px;
+  height: 10px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 10px;
+  color: #000000;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+.right > .row2 {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+  width: 520px;
+  height: 36px;
+  margin-bottom: 40px;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+.button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  border: none;
+  width: auto;
+  height: auto;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+  cursor: pointer;
+}
+.button_Action {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  border: none;
+  color: white;
+
+  width: auto;
+  height: auto;
+
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 6px;
+  cursor: pointer;
+
+  order: 0;
+  flex-grow: 0;
+}
+.right > .row3 {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 30px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 10px;
+  width: 520px;
+  height: 10px;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+.right > .row4 {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+  width: 520px;
+  height: 36px;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+.right > .row5 {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 12px;
+  width: 492px;
+  height: 48px;
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+}
+.row5 > .button1 {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  width: 240px;
+  height: 48px;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.row5 > .button2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  width: 240px;
+  height: 48px;
+  background: #000000;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Left Side */
+.section2 > .left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 24px;
+  width: 520px;
+  height: 96px;
+  flex: none;
+  order: 0;
+  flex-grow: 1;
+  z-index: 0;
+}
+.left > .title {
+  width: 520px;
+  height: 48px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 48px;
+  color: #000000;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  margin-bottom: 24px;
+}
+.left > .description {
+  width: 520px;
+  height: 24px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
