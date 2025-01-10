@@ -1,7 +1,7 @@
 import axios from "axios";
 import style from "@/styles/signup.module.css";
 import { useState } from "react";
-import { useAuthStore } from "@/authStore";
+import { useAuthStore } from "./authStore";
 import { useRouter } from "next/router";
 
 export default function SignUp() {

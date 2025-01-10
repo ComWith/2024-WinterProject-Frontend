@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
-import { useAuthStore } from "@/authStore";
+import { useAuthStore } from "@/pages/authStore";
 import style from "./header.module.css";
+import Image from "next/image";
 
 export default function NavigationBar() {
   const router = useRouter();
@@ -15,21 +16,26 @@ export default function NavigationBar() {
   };
 
   return (
-    <nav className={style.navigation}>
-      <h1 className={style.logo} onClick={() => router.push("/home")}>
-        웹서비스 이름
-      </h1>
+    <nav className={style.top_bar}>
+      <div className={style.Rectangle} />
+      <h1 className={style.title}>Music Score Converter</h1>
 
       <div className={style.menu}>
+        <button className={style.Button} onClick={() => router.push("/home")}>
+          Home
+        </button>
         <button
-          className={style.menu_item}
+          className={style.Button}
           onClick={() => router.push("/allsheets")}
         >
-          변환된 악보
+          Uploaded Score
         </button>
-        <button className={style.menu_item} onClick={handleLogout}>
-          로그아웃
+        <button className={style.Button} onClick={handleLogout}>
+          Logout
         </button>
+        <div className={style.profile}>
+          <Image src="/profile.svg" alt="Profile" width={30} height={30} />
+        </div>
       </div>
     </nav>
   );
