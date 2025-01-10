@@ -1,12 +1,13 @@
 import axios from "axios";
 import style from "./signup.module.css";
 import { useState } from "react";
-import { useAuthStore } from "../entities/user/authStore";
+import { useAuthStore } from "../authStore";
 import { useRouter } from "next/router";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
     nickname: "",
+    id: "",
     password: "",
   });
 
@@ -30,14 +31,18 @@ export default function SignUp() {
     try {
       const response = await axios.post("/api/users", {
         nickname: formData.nickname,
+        user_id: formData.id,
         password: formData.password,
       });
 
       // 회원가입 성공 시 Zustand에 사용자 정보 저장
-      setUser({ nickname: formData.nickname });
+      setUser({
+        nickname: formData.nickname,
+        profileImage: "/default-profile.png", // 기본 프로필 이미지 설정
+      });
       alert("회원가입 성공!");
       router.push("/home");
-      console.log(response.data);
+      console.log(response);
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         setError(error.response?.data?.message || "회원가입에 실패했습니다.");
@@ -49,29 +54,39 @@ export default function SignUp() {
 
   return (
     <div className={style.container}>
-      <section>
-        <h1 className={style.welcome}>Hey, Welcome Back!</h1>
-      </section>
-      <section>
+      <div>
+        <h1>Registration Information</h1>
+        <p>Please fill in the required fields.</p>
+      </div>
+      <div className={style.form_container}>
         <div>
           <h3 className={style.input_text}>Nickname</h3>
           <input
             type="text"
             name="nickname"
-            placeholder="사용하실 닉네임을 입력해주세요..."
+            placeholder="Enter your nickname"
             className={style.input_data}
             value={formData.nickname}
             onChange={onHandleChange}
           />
         </div>
-      </section>
-      <section>
+        <div>
+          <h3 className={style.input_text}>ID</h3>
+          <input
+            type="text"
+            name="id"
+            placeholder="Enter your user ID"
+            className={style.input_data}
+            value={formData.id}
+            onChange={onHandleChange}
+          />
+        </div>
         <div>
           <h3 className={style.input_text}>Password</h3>
           <input
             type="password"
             name="password"
-            placeholder="비밀번호를 정해주세요..."
+            placeholder="Enter your password"
             className={style.input_data}
             value={formData.password}
             onChange={onHandleChange}
@@ -81,7 +96,7 @@ export default function SignUp() {
           </button>
           {error && <p className={style.error}>{error}</p>}
         </div>
-      </section>
+      </div>
     </div>
   );
 }
