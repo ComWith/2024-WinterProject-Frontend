@@ -1,24 +1,29 @@
-// pages/api/login.ts
 import { NextApiRequest, NextApiResponse } from "next";
 import { users } from "./users"; // users 배열을 가져옵니다.
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
-    const { nickname, password } = req.body;
+    const { id, password } = req.body;
 
-    const user = users.find(
-      (user) => user.nickname === nickname && user.password === password
-    );
+    // ID로 사용자 찾기
+    const user = users.find((user) => user.id === id);
 
-    if (user) {
-      return res
-        .status(200)
-        .json({ message: "로그인 성공!", user: { nickname } });
-    } else {
+    if (!user) {
       return res
         .status(401)
-        .json({ message: "닉네임 또는 비밀번호가 일치하지 않습니다." });
+        .json({ message: "존재하지 않는 ID입니다. 회원가입을 진행해주세요." });
     }
+
+    // 비밀번호 검증
+    if (user.password !== password) {
+      return res.status(401).json({ message: "비밀번호가 올바르지 않습니다." });
+    }
+
+    // 로그인 성공
+    return res.status(200).json({
+      message: "로그인 성공!",
+      user: { id: user.id, nickname: user.nickname },
+    });
   }
 
   res.setHeader("Allow", ["POST"]);

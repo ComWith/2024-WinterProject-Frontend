@@ -8,17 +8,15 @@
   gap: 60px;
 }
 
+.signup_container {
+}
+
 .text_container {
   width: 60%;
 }
 
 .form_container {
   width: 40%;
-}
-
-.welcome {
-  font-size: 1rem;
-  text-align: center;
 }
 
 .input_text {
