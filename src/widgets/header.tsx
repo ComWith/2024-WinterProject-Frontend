@@ -12,7 +12,7 @@ export default function NavigationBar() {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
     alert("로그아웃 되었습니다.");
-    router.push("/login");
+    router.push("/");
   };
 
   return (
@@ -33,7 +33,10 @@ export default function NavigationBar() {
         <button className={style.button} onClick={handleLogout}>
           Logout
         </button>
-        <div className={style.profile}>
+        <div
+          className={style.profile}
+          onClick={() => router.push("/allsheets")}
+        >
           <Image src="/profile.svg" alt="Profile" width={30} height={30} />
         </div>
       </div>
