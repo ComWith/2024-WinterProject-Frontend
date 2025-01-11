@@ -12,7 +12,7 @@ export default function NavigationBar() {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
     alert("로그아웃 되었습니다.");
-    router.push("/login");
+    router.push("/");
   };
 
   return (
@@ -20,20 +20,17 @@ export default function NavigationBar() {
       <div className={style.Rectangle} />
       <h1 className={style.title}>Music Score Converter</h1>
 
-      <div className={style.menu}>
+      <div className={style.navigation}>
         <button className={style.Button} onClick={() => router.push("/home")}>
           Home
-        </button>
-        <button
-          className={style.Button}
-          onClick={() => router.push("/allsheets")}
-        >
-          Uploaded Score
         </button>
         <button className={style.Button} onClick={handleLogout}>
           Logout
         </button>
-        <div className={style.profile}>
+        <div
+          className={style.profile}
+          onClick={() => router.push("/allsheets")}
+        >
           <Image src="/profile.svg" alt="Profile" width={30} height={30} />
         </div>
       </div>

@@ -2,27 +2,36 @@
 
 /* Auto layout */
 .top_bar {
+  /* Top Bar */
+
+  /* Auto layout */
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 10px;
-  gap: 20px;
+  padding: 20px;
+  gap: 0px;
+  width: auto;
+  height: auto;
+  max-height: 40px;
+  min-width: 700px;
 
+  margin-bottom: 0px;
   position: relative;
-  height: 80px;
-  left: 1px;
-  right: -1px;
-  top: 1px;
+  top: -8px;
+  right: auto;
+  left: auto;
 
-  background: #ffffff;
+  background: #000000;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.12);
 }
 /* Top Bar */
 
 .title {
-  width: 1039px;
-  height: 36px;
+  /* title */
+
+  width: auto;
+  height: auto;
 
   font-family: "Roboto";
   font-style: normal;
@@ -30,30 +39,27 @@
   font-size: 28px;
   line-height: 36px;
   /* identical to box height, or 129% */
+
+  color: #ffffff;
+
   /* Inside auto layout */
   flex: none;
   order: 1;
   flex-grow: 1;
-
-  color: #000000;
 }
 
-/* navigation */
-.menu {
-  /* Auto layout */
+.navigation {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 0px;
-  gap: 40px;
-  white-space: nowrap;
+  gap: 35px;
 
   width: auto;
   height: auto;
-  text-overflow: ellipsis;
 
-  background: #ffffff;
+  background: #010101;
 
   /* Inside auto layout */
   flex: none;
@@ -63,7 +69,6 @@
 
 .Button {
   /* tab */
-  cursor: pointer;
   all: unset; /* 기본 스타일을 모두 제거 */
   background: transparent; /* 배경 제거 */
   border: none; /* 테두리 제거 */
@@ -80,8 +85,9 @@
   font-size: 16px;
   line-height: 24px;
   /* identical to box height, or 150% */
+  cursor: pointer;
 
-  color: #000000;
+  color: white;
 
   /* Inside auto layout */
   flex: none;
@@ -99,7 +105,7 @@
   gap: 4px;
 
   width: auto;
-  height: 44px;
+  height: auto;
 
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 6px;
@@ -107,13 +113,16 @@
   flex: none;
   order: 2;
   flex-grow: 0;
+  cursor: pointer;
 }
 
 .Rectangle {
+  /* Rectangle 4137 */
+
   width: 40px;
   height: 40px;
-
-  background: rgba(0, 0, 0, 0.1);
+  margin-right: 20px;
+  background: #fbfbfb;
   border-radius: 100px;
 
   /* Inside auto layout */
