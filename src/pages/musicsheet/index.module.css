@@ -1,0 +1,69 @@
+.container {
+  position: absolute;
+}
+
+.header {
+  text-align: center;
+  margin-top: 70px;
+  margin-bottom: 70px;
+}
+
+.sheet_list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4열 고정 */
+  grid-auto-rows: auto; /* 카드 높이는 내용에 따라 */
+  gap: 20px;
+  padding: 10px;
+  justify-content: center;
+}
+/* 카드 스타일 */
+.sheet_card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sheet_card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 텍스트 정보 */
+.sheet_info h2 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+/* 페이지네이션 */
+.pagination {
+  position: relative;
+  bottom: -100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+  gap: 8px;
+}
+
+.pagination button {
+  border: none;
+  background-color: #0070f3;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 1rem;
+}
