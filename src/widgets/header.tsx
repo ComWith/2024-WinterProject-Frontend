@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useAuthStore } from "@/authStore";
+import { useAuthStore } from "@/pages/stores/authStore";
 import style from "./header.module.css";
 import Image from "next/image";
 
@@ -19,12 +19,11 @@ export default function NavigationBar() {
     <nav className={style.top_bar}>
       <div className={style.Rectangle} />
       <h1 className={style.title}>Music Score Converter</h1>
-
       <div className={style.navigation}>
-        <button className={style.Button} onClick={() => router.push("/home")}>
+        <button className={style.button} onClick={() => router.push("/home")}>
           Home
         </button>
-        <button className={style.Button} onClick={handleLogout}>
+        <button className={style.button} onClick={handleLogout}>
           Logout
         </button>
         <div
