@@ -6,7 +6,7 @@ interface User {
 }
 
 interface AuthState {
-  user: User | null; // User 타입 사용
+  user: User | null;
   isLoggedIn: boolean;
   setUser: (user: User) => void; // User 타입 사용
   logout: () => void;
