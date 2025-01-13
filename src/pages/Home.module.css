@@ -1,113 +1,3 @@
-/* General Section Styles */
-.section {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 60px 170px;
-  gap: 60px;
-  isolation: isolate;
-  position: absolute;
-  width: auto;
-  height: auto;
-  left: 1px;
-  top: 81px;
-}
-
-/* Image Container */
-.image_container {
-  position: relative;
-  width: 1100px;
-  height: 292px;
-  background: rgba(217, 217, 217, 0.5);
-  border-radius: 6px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-}
-.image_container > .text {
-  justify-content: center;
-  position: absolute;
-  height: 16px;
-  left: 16px;
-  right: 16px;
-  top: calc(50% - 16px / 2);
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  color: #000000;
-}
-.image_container > .pagination {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-}
-
-/* Section 2 Styles */
-.section2 {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 60px 170px;
-  gap: 60px;
-  isolation: isolate;
-  position: absolute;
-  width: auto;
-  height: auto;
-  left: 1px;
-  top: 501px;
-}
-
-/* Right Side */
-.right {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 10px;
-  font-weight: bold;
-  width: 520px;
-  height: 30px;
-  flex: none;
-  order: 1;
-  flex-grow: 1;
-  z-index: 1;
-}
-.right > .row1 {
-  width: 520px;
-  height: 10px;
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: bold;
-  font-size: 14px;
-  line-height: 10px;
-  color: #000000;
-  flex: none;
-  order: 0;
-  align-self: stretch;
-  flex-grow: 0;
-}
-.right > .row2 {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 8px;
-  width: 520px;
-  height: 36px;
-  margin-bottom: 40px;
-  flex: none;
-  order: 1;
-  align-self: stretch;
-  flex-grow: 0;
-}
 .button {
   display: flex;
   flex-direction: column;
@@ -117,10 +7,17 @@
   border: none;
   width: auto;
   height: auto;
-  background: rgba(0, 0, 0, 0.05);
+  background: #fffdfd;
   border-radius: 6px;
   cursor: pointer;
 }
+
+.Window {
+  width: auto;
+  height: auto;
+  box-sizing: border-box;
+}
+
 .button_Action {
   display: flex;
   flex-direction: column;
@@ -140,117 +37,618 @@
   order: 0;
   flex-grow: 0;
 }
-.right > .row3 {
+
+.section {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 30px;
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: bold;
-  font-size: 14px;
-  line-height: 10px;
-  width: 520px;
-  height: 10px;
-  flex: none;
-  order: 1;
-  align-self: stretch;
-  flex-grow: 0;
-}
-.right > .row4 {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 8px;
-  width: 520px;
-  height: 36px;
-  flex: none;
-  order: 1;
-  align-self: stretch;
-  flex-grow: 0;
-}
-.right > .row5 {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 12px;
-  width: 492px;
-  height: 48px;
-  flex: none;
-  order: 2;
-  flex-grow: 0;
-}
-.row5 > .button1 {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 12px;
-  width: 240px;
-  height: 48px;
-  border: 1px solid #000000;
-  border-radius: 8px;
-  cursor: pointer;
-}
-.row5 > .button2 {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 12px;
-  width: 240px;
-  height: 48px;
-  background: #000000;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
+  padding: 60px 170px;
+  gap: 60px;
+
+  margin-top: -89px;
+  position: relative;
+  width: auto; /* 부모 요소에 맞게 100%로 설정 */
+  height: auto; /* 높이는 자동으로 조정 */
+  top: 81px; /* 위치를 조정 (상단으로부터 81px) */
+
+  background: rgba(138, 180, 199, 0.81);
 }
 
-/* Left Side */
-.section2 > .left {
+/* Image Container */
+.section > .left {
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
-  align-items: flex-start;
   padding: 0px;
   gap: 24px;
-  width: 520px;
-  height: 96px;
+
+  width: auto;
+  height: auto;
+
+  /* Inside auto layout */
   flex: none;
   order: 0;
   flex-grow: 1;
   z-index: 0;
 }
-.left > .title {
+.section > .left > .title {
+  /* title */
+
   width: 520px;
   height: 48px;
+
   font-family: "Roboto";
   font-style: normal;
   font-weight: 700;
   font-size: 40px;
   line-height: 48px;
+  /* identical to box height, or 120% */
+
   color: #000000;
+  margin-bottom: -60px;
+
+  /* Inside auto layout */
   flex: none;
   order: 0;
   align-self: stretch;
   flex-grow: 0;
-  margin-bottom: 24px;
 }
-.left > .description {
+.section > .left > .text {
+  /* text */
+
   width: 520px;
   height: 24px;
+
   font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
+  /* identical to box height, or 150% */
+
   color: #000000;
+
+  /* Inside auto layout */
   flex: none;
   order: 1;
   align-self: stretch;
   flex-grow: 0;
+}
+
+.section > .right {
+  /* right */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 40px;
+  top: auto;
+  bottom: 50px;
+
+  width: auto;
+  height: auto;
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  flex-grow: 1;
+  z-index: 1;
+}
+
+.section > .right .title {
+  /* title */
+
+  width: 520px;
+  height: 20px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: -80px;
+
+  /* identical to box height, or 143% */
+
+  color: #000000;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.section > .right .input {
+  /* input */
+
+  box-sizing: border-box;
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 4px;
+
+  width: 520px;
+  height: 36px;
+
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.section > .right > .row1 {
+  /* row */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 80px;
+
+  width: 520px;
+  height: 60px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+.section > .right > .row2 {
+  /* row2 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 80px;
+
+  width: 520px;
+  height: 60px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.section > .right > .row3 {
+  /* row3 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 80px;
+
+  width: 520px;
+  height: 60px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 2;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.section > .right > .row4 {
+  /* row4 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 80px;
+
+  width: 520px;
+  height: 60px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 3;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.section > .right .button_group {
+  /* button_group1 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+
+  width: 520px;
+  height: 36px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+  cursor: pointer;
+}
+
+.section > .right > .row5 {
+  /* row5 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 12px;
+
+  width: 492px;
+  height: 48px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 4;
+  flex-grow: 0;
+}
+
+.section > .right > .row5 > .cancel {
+  /* Cancel */
+
+  box-sizing: border-box;
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+
+  width: 240px;
+  height: 48px;
+
+  background: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 8px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  cursor: pointer;
+}
+
+.section > .right > .row5 > .upload {
+  /* Upload */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+
+  width: 240px;
+  height: 48px;
+
+  background: #000000;
+  border-radius: 8px;
+  color: white;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  cursor: pointer;
+}
+
+.section2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 170px;
+  gap: 60px;
+
+  position: relative; /* absolute에서 relative로 변경하여 position을 정렬 */
+  width: auto; /* 부모 요소에 맞게 100%로 설정 */
+  height: auto; /* 높이는 자동으로 조정 */
+  top: 40px; /* 화면에서 649px만큼 떨어진 위치 */
+
+  background: #ffffff;
+}
+
+.section2 > .left {
+  /* left */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 24px;
+
+  width: auto;
+  height: auto;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 1;
+  z-index: 0;
+}
+
+.section2 > .left > .row1 {
+  /* row1 */
+
+  width: auto;
+  height: auto;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 48px;
+  /* identical to box height, or 120% */
+
+  color: #000000;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.section2 > .left > .row2 {
+  /* row2 */
+
+  width: auto;
+  height: auto;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  /* identical to box height, or 150% */
+
+  color: #000000;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.section2 > .left > .row3 {
+  /* row3 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 12px;
+
+  width: auto;
+  height: auto;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+}
+
+.section2 > .left > .row3 > .Edit {
+  /* Edit */
+
+  box-sizing: border-box;
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+
+  width: 240px;
+  height: 48px;
+
+  border: 1px solid #000000;
+  border-radius: 8px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  cursor: pointer;
+}
+
+.section2 > .left > .row3 > .Confirm {
+  /* Confirm */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+
+  width: 240px;
+  height: 48px;
+
+  background: #000000;
+  border-radius: 8px;
+  color: white;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  cursor: pointer;
+}
+
+.section2 > .right {
+  /* right */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+
+  width: auto;
+  height: auto;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  flex-grow: 1;
+  z-index: 1;
+}
+
+.section2 > .right > .Item {
+  /* item */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0px;
+  gap: 16px;
+  isolation: isolate;
+
+  width: 520px;
+  height: 124px;
+
+  background: #ffffff;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 1;
+}
+.section2 > .right > .Item > .frame {
+  /* frame */
+
+  width: 60px;
+  height: 60px;
+
+  background: rgba(182, 120, 120, 0.22);
+  border-radius: 30px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  z-index: 0;
+}
+
+.section2 > .right > .Item > .component1 {
+  /* Title */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+
+  width: 228px;
+  height: 52px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  flex-grow: 1;
+  z-index: 1;
+}
+
+.section2 > .right > .Item > .component1 > .title {
+  /* title */
+
+  width: 228px;
+  height: 28px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+  /* identical to box height, or 140% */
+
+  color: #000000;
+
+  /* Inside auto layout */
+  margin-bottom: -20px;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.section2 > .right > .Item > .component1 > .subtitle {
+  /* subtitle */
+
+  width: 228px;
+  height: 24px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  /* identical to box height, or 150% */
+
+  color: rgba(0, 0, 0, 0.5);
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.section2 > .right > .Item > .component2 {
+  /* component2 */
+
+  width: 200px;
+  height: 84px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 28px;
+  /* or 140% */
+  text-align: right;
+  white-space: nowrap;
+
+  color: #000000;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+  z-index: 2;
 }
