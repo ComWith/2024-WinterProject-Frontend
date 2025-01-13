@@ -5,5 +5,5 @@ export interface musicSheetData {
   composer: string;
   instrument: string;
   stage: string;
-  sheet_id: number;
+  url: string;
 }
