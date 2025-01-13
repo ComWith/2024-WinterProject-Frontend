@@ -3,9 +3,56 @@ import NavigationBar from "@/widgets/header";
 import style from "@/pages/Home.module.css";
 import Image from "next/image";
 
+import { usePdfStore } from "./stores/pdfStore";
+
 export default function Home() {
   const [isDragging, setIsDragging] = useState(false);
   const [uploadedFileName, setUploadedFileName] = useState<string | null>(null);
+  const [file, setFile] = useState<File | null>(null);
+
+  const [title, setTitle] = useState("");
+  const [composer, setComposer] = useState("");
+  const [instrument, setInstrument] = useState("");
+  const [level, setLevel] = useState("");
+
+  const addPdfUrl = usePdfStore((state) => state.addPdfUrl);
+
+  // Confirm 버튼 클릭 시 데이터 API로 보내고, pdf_url로 /allsheets로 이동
+  const handleConfirm = async () => {
+    const data = new FormData();
+    data.append("title", title);
+    data.append("composer", composer);
+    data.append("instrument", instrument);
+    data.append("level", level);
+
+    // 파일 추가
+    if (file) {
+      data.append("file", file);
+    }
+
+    try {
+      const response = await fetch("/api/generatePdf", {
+        method: "POST",
+        body: data, // FormData를 body로 전송
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log(result);
+
+        const pdfUrl = result.pdf_url;
+        console.log(pdfUrl);
+        if (pdfUrl) {
+          // PDF URL을 zustand에 저장
+          addPdfUrl(pdfUrl);
+        }
+      } else {
+        console.error("API request failed");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -24,7 +71,8 @@ export default function Home() {
     if (files.length > 0) {
       const file = files[0];
       setUploadedFileName(file.name);
-      console.log("Dropped file:", file.name);
+      setFile(file);
+      console.log("Dropped file:", file);
       // 여기에 파일 업로드 처리 로직 추가
     }
   };
@@ -49,11 +97,6 @@ export default function Home() {
       row4: null,
     });
   };
-
-  const [title, setTitle] = useState("");
-  const [composer, setComposer] = useState("");
-  const [instrument, setInstrument] = useState("");
-  const [level, setLevel] = useState("");
 
   // section2에 반영할 값 상태 관리
   const [uploadedData, setUploadedData] = useState<{
@@ -94,7 +137,7 @@ export default function Home() {
   };
 
   return (
-    <>
+    <div className={style.Window}>
       <NavigationBar />
       <div className={style.section}>
         <div
@@ -169,7 +212,10 @@ export default function Home() {
                     ? style.button_Action
                     : style.button
                 }
-                onClick={() => toggleButton("row2", "Violin")}
+                onClick={() => {
+                  toggleButton("row2", "Violin");
+                  handleSelectInstrument("Violin");
+                }}
               >
                 Violin
               </button>
@@ -185,7 +231,10 @@ export default function Home() {
                     ? style.button_Action
                     : style.button
                 }
-                onClick={() => toggleButton("row4", "Beginner")}
+                onClick={() => {
+                  toggleButton("row4", "Beginner");
+                  handleSelectLevel("Beginner");
+                }}
               >
                 Beginner
               </button>
@@ -195,7 +244,10 @@ export default function Home() {
                     ? style.button_Action
                     : style.button
                 }
-                onClick={() => toggleButton("row4", "Intermediate")}
+                onClick={() => {
+                  toggleButton("row4", "Intermediate");
+                  handleSelectLevel("Intermediate");
+                }}
               >
                 Intermediate
               </button>
@@ -205,7 +257,10 @@ export default function Home() {
                     ? style.button_Action
                     : style.button
                 }
-                onClick={() => toggleButton("row4", "Advanced")}
+                onClick={() => {
+                  toggleButton("row4", "Advanced");
+                  handleSelectLevel("Advanced");
+                }}
               >
                 Advanced
               </button>
@@ -229,7 +284,9 @@ export default function Home() {
           <h1 className={style.row2}>마지막으로 체크해보세요.</h1>
           <div className={style.row3}>
             <button className={style.Edit}>Edit</button>
-            <button className={style.Confirm}>Confirm</button>
+            <button className={style.Confirm} onClick={handleConfirm}>
+              Confirm
+            </button>
           </div>
         </div>
 
@@ -251,6 +308,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

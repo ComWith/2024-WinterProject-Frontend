@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useAuthStore } from "@/pages/authStore";
+import { useAuthStore } from "@/pages/stores/authStore";
 import style from "./header.module.css";
 import Image from "next/image";
 

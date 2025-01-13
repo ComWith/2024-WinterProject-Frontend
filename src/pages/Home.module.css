@@ -12,6 +12,12 @@
   cursor: pointer;
 }
 
+.Window {
+  width: auto;
+  height: auto;
+  box-sizing: border-box;
+}
+
 .button_Action {
   display: flex;
   flex-direction: column;
@@ -636,6 +642,7 @@
   line-height: 28px;
   /* or 140% */
   text-align: right;
+  white-space: nowrap;
 
   color: #000000;
 

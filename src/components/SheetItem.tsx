@@ -6,10 +6,10 @@ export default function SheetItem({
   instrument,
   composer,
   stage,
-  sheet_id,
+  url,
 }: musicSheetData) {
   return (
-    <Link href={`sheet/${sheet_id}`}>
+    <Link href={`allsheets/${url}`}>
       <div>
         <div>{title}</div>
         <div>{composer}</div>

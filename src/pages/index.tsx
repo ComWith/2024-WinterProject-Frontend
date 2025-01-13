@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import style from "@/styles/index.module.css";
 import { useState } from "react";
 import axios from "axios";
-import { useAuthStore } from "./authStore";
+import { useAuthStore } from "./stores/authStore";
 
 export default function Login() {
   const [formData, setFormData] = useState({
