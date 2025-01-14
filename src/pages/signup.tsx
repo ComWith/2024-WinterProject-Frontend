@@ -3,7 +3,7 @@ import style from "@/styles/signup.module.css";
 import { useState } from "react";
 import { useAuthStore } from "./stores/authStore";
 import { useRouter } from "next/router";
-import NavigationBar from "@/widgets/header";
+import NavigationLoginBar from "@/widgets/header_login";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
@@ -60,7 +60,7 @@ export default function SignUp() {
 
   return (
     <>
-      <NavigationBar />
+      <NavigationLoginBar />
       <hr />
       <div className={style.container}>
         <div>

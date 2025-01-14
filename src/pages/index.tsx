@@ -3,7 +3,7 @@ import style from "@/styles/index.module.css";
 import { useState } from "react";
 import axios from "axios";
 import { useAuthStore } from "./stores/authStore";
-import NavigationBar from "@/widgets/header";
+import NavigationLoginBar from "@/widgets/header_login";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -62,7 +62,7 @@ export default function Login() {
 
   return (
     <>
-      <NavigationBar />
+      <NavigationLoginBar />
       <hr />
       <div className={style.container}>
         <div>
