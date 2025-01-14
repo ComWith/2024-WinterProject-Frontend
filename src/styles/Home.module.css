@@ -80,8 +80,10 @@ body {
   gap: 24px;
 
   width: auto;
-  height: auto;
+  height: 448px;
 
+  min-height: 448px;
+  top: -20px;
   /* Inside auto layout */
   flex: none;
   order: 0;
