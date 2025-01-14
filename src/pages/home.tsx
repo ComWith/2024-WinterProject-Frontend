@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import NavigationBar from "@/widgets/header";
 import style from "@/styles/Home.module.css";
 import Image from "next/image";
@@ -9,11 +10,22 @@ export default function Home() {
   const [isDragging, setIsDragging] = useState(false);
   const [uploadedFileName, setUploadedFileName] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
+  const router = useRouter();
 
   const [title, setTitle] = useState("");
   const [composer, setComposer] = useState("");
   const [instrument, setInstrument] = useState("");
   const [level, setLevel] = useState("");
+
+  useEffect(() => {
+    // localStorage에서 로그인 정보를 가져옴
+    const user = localStorage.getItem("user");
+
+    if (!user) {
+      // 로그인하지 않은 경우, 로그인 페이지로 리디렉션
+      router.push("/");
+    }
+  }, [router]);
 
   const addPdfUrl = usePdfStore((state) => state.addPdfUrl);
 
@@ -137,7 +149,7 @@ export default function Home() {
   };
 
   return (
-    <div className={style.Window}>
+    <div className={style.window}>
       <NavigationBar />
       <div className={style.section}>
         <div
