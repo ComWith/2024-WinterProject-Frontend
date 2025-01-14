@@ -5,8 +5,9 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 
 type Score = {
-  sheet_id: number;
   title: string;
+  composer: string;
+  sheet_id: string;
 };
 
 const ITEMS_PER_PAGE = 8; // 한 페이지에 보여줄 악보 개수
@@ -19,14 +20,22 @@ export default function AllSheet() {
   useEffect(() => {
     async function fetchScores(): Promise<void> {
       try {
-        const response = await fetch("/api/scores");
+        const response = await fetch("/api/generatePdf");
         if (!response.ok) {
           throw new Error("Failed to fetch scores");
         }
-        const data: Score[] = await response.json();
-        setScores(data);
+        const data = await response.json();
+        console.log(data);
+
+        // 데이터가 배열인지 확인하고, 그렇지 않으면 빈 배열로 설정
+        if (Array.isArray(data.musicsheet)) {
+          setScores(data.musicsheet);
+        } else {
+          setScores([]);
+        }
       } catch (error) {
         console.error("Failed to load scores:", error);
+        setScores([]); // 오류 발생 시 빈 배열로 설정
       }
     }
 
@@ -38,7 +47,7 @@ export default function AllSheet() {
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const currentScores = scores.slice(startIndex, endIndex);
 
-  const handleImageClick = (sheet_id: number) => {
+  const handleImageClick = (sheet_id: string) => {
     router.push(`/allsheets/${sheet_id}`); // 개별 악보 페이지로 이동
   };
 
@@ -80,6 +89,7 @@ export default function AllSheet() {
                 </div>
                 <div className={style.Box}>
                   <div className={style.title}>{score.title}</div>
+                  <div className={style.subtitle}>{score.composer}</div>
                 </div>
               </div>
             ))}
