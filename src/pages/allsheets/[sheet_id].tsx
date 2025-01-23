@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NavigationBar from "@/widgets/header";
 import Image from "next/image";
-import style from "./individualsheet.module.css";
-import { GetServerSidePropsContext } from "next";
+import style from "./[sheet_id].module.css";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 type MusicSheet = {
   instrument: string;
@@ -11,39 +12,81 @@ type MusicSheet = {
 };
 
 type Props = {
-  musicsheet: MusicSheet;
+  musicsheet: MusicSheet | null;
+  error?: string;
 };
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const { sheet_id } = context.params!;
+export default function MusicSheetPage() {
+  const [musicsheet, setMusicsheet] = useState<MusicSheet | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [showPreview, setShowPreview] = useState(false);
+  const router = useRouter();
+  const { sheet_id } = router.query; // sheet_id를 URL 파라미터에서 가져옵니다.
 
-  try {
-    // src/api/generatePdf 경로로 요청을 보냅니다.
-    const res = await fetch(`localhost:3000/allsheets/${sheet_id}`);
+  useEffect(() => {
+    if (!sheet_id) return; // sheet_id가 없는 경우에는 요청하지 않도록 방어 처리
 
-    if (!res.ok) {
-      throw new Error("Failed to fetch music sheet");
-    }
-    const data = await res.json();
+    const fetchMusicSheet = async () => {
+      const accessToken = localStorage.getItem("access_token"); // 클라이언트에서 access_token을 가져옵니다.
 
-    // 데이터가 없거나 오류가 발생한 경우 처리
-    if (!data.sheet_id) {
-      return { notFound: true };
-    }
+      if (!accessToken) {
+        setError("No access token found.");
+        return;
+      }
 
-    return { props: { musicsheet: data } }; // 반환된 데이터를 props로 전달
-  } catch (error) {
-    console.error(error);
-    return { notFound: true };
-  }
-}
+      try {
+        const response = await axios.get<MusicSheet>(
+          `http://52.78.134.101:5000/musicsheets/${sheet_id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "Content-Type": "application/json",
+            },
+            withCredentials: true,
+          }
+        );
 
-export default function MusicSheetPage({ musicsheet }: Props) {
-  const [showPreview, setShowPreview] = useState(false); // 미리보기 상태
+        if (response.status === 401) {
+          setError("Unauthorized access");
+          return;
+        }
+
+        if (response.status === 404) {
+          setError("Music sheet not found");
+          return;
+        }
+
+        setMusicsheet(response.data);
+      } catch (error) {
+        console.error("Error fetching music sheet:", error);
+        setError("Failed to load music sheet");
+      }
+    };
+
+    fetchMusicSheet();
+  }, [sheet_id]);
 
   const handlePreview = () => {
-    setShowPreview(!showPreview); // 버튼을 누를 때마다 미리보기 토글
+    setShowPreview(!showPreview);
   };
+
+  if (error) {
+    return (
+      <div className={style.error}>
+        <h1>Error</h1>
+        <p>{error}</p>
+      </div>
+    );
+  }
+
+  if (!musicsheet) {
+    return (
+      <div className={style.error}>
+        <h1>Music Sheet Not Found</h1>
+        <p>The requested music sheet could not be found.</p>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -70,7 +113,7 @@ export default function MusicSheetPage({ musicsheet }: Props) {
             <a
               href={musicsheet.pdf_url}
               target="_blank"
-              download={musicsheet.pdf_url}
+              rel="noopener noreferrer"
               className={style.button}
             >
               Download PDF
@@ -78,7 +121,6 @@ export default function MusicSheetPage({ musicsheet }: Props) {
           </div>
         </div>
 
-        {/* PDF 미리보기 영역 */}
         {showPreview && (
           <div className={style.preview}>
             <iframe

@@ -77,8 +77,36 @@ export default function AllSheet() {
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const currentScores = scores.slice(startIndex, endIndex);
 
-  const handleImageClick = (sheet_id: string) => {
-    router.push(`/allsheets/${sheet_id}`); // 개별 악보 페이지로 이동
+  const handleImageClick = async (sheet_id: string) => {
+    const accessToken = localStorage.getItem("access_token");
+
+    if (!accessToken) {
+      console.error("Access Token is missing");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `http://52.78.134.101:5000/musicsheets/${sheet_id}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to post to server");
+      }
+
+      // 요청이 성공하면 페이지 이동
+      router.push(`/allsheets/${sheet_id}`);
+      console.log(response);
+    } catch (error) {
+      console.error("Failed to post to server:", error);
+    }
   };
 
   const handleDeleteClick = async (sheet_id: string) => {

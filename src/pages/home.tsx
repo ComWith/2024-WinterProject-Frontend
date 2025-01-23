@@ -53,6 +53,7 @@ export default function Home() {
     }
     const accessToken = localStorage.getItem("access_token");
     console.log(accessToken);
+    console.log(document.cookie);
 
     try {
       const response = await fetch(
