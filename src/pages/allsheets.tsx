@@ -162,6 +162,7 @@ export default function AllSheet() {
       <NavigationBar />
       <div className={style.window}>
         <div className={style.container}>
+          <input className={style.input} placeholder="Search Score"></input>
           <h1 className={style.titleContainer}>Uploaded Scores</h1>
           <p className={style.subtitle}>
             View and manage your converted PDF scores.
