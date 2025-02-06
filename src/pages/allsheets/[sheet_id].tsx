@@ -152,7 +152,9 @@ export default function MusicSheetPage() {
         {showPreview && (
           <div className={style.preview}>
             <iframe
-              src={musicsheet.pdf_url}
+              src={`https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(
+                musicsheet.pdf_url
+              )}`}
               width="100%"
               height="600px"
               className={style.iframe}
