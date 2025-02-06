@@ -13,17 +13,16 @@ type MusicSheet = {
 
 export default function MusicSheetPage() {
   const [musicsheet, setMusicsheet] = useState<MusicSheet | null>(null);
-  const [uploadedVideos, setUploadedVideos] = useState<string[]>([]); // 업로드된 영상 URL 배열
+  const [uploadedVideos, setUploadedVideos] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [showPreview, setShowPreview] = useState(false);
   const [uploading, setUploading] = useState(false);
   const router = useRouter();
-  const { sheet_id } = router.query; // sheet_id를 URL 파라미터에서 가져옵니다.
+  const { sheet_id } = router.query;
 
   useEffect(() => {
     if (!sheet_id) return;
 
-    // 더미 데이터 처리
     if (sheet_id === "dummy_id") {
       setMusicsheet({
         instrument: "Piano",
@@ -35,7 +34,6 @@ export default function MusicSheetPage() {
 
     const fetchMusicSheet = async () => {
       const accessToken = localStorage.getItem("access_token");
-
       if (!accessToken) {
         setError("No access token found.");
         return;
@@ -52,14 +50,12 @@ export default function MusicSheetPage() {
             withCredentials: true,
           }
         );
-
         setMusicsheet(response.data);
       } catch (error) {
         console.error("Error fetching music sheet:", error);
         setError("Failed to load music sheet");
       }
     };
-
     fetchMusicSheet();
   }, [sheet_id]);
 
@@ -76,23 +72,58 @@ export default function MusicSheetPage() {
     const formData = new FormData();
     formData.append("file", file);
 
+    const accessToken = localStorage.getItem("access_token");
+    if (!accessToken) {
+      setError("No access token found.");
+      return;
+    }
+
     setUploading(true);
 
     try {
+      // ✅ 1. 비디오 업로드 API 호출
       const response = await axios.post(
-        `https://smini.site//musicsheets/${sheet_id}`,
+        `https://smini.site/musicsheets/${sheet_id}`,
         formData,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${accessToken}`,
           },
         }
       );
 
-      setUploadedVideos((prev) => [...prev, response.data.video_path]); // 서버에서 반환된 영상 URL 추가
+      const videoId = response.data.video_id;
+      console.log("Returned videoId:", videoId);
+
+      if (!videoId) {
+        throw new Error("No video_id returned from server.");
+      }
+
+      // ✅ 2. 업로드 직후 영상 조회 대신 일정 시간 후 조회 (3초 후 GET 요청)
+      setTimeout(async () => {
+        try {
+          const videoResponse = await axios.get<{ video_path: string }>(
+            `https://smini.site/musicsheets/video/${videoId}`,
+            {
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+              },
+            }
+          );
+
+          const videoPath = videoResponse.data.video_path;
+          console.log("Fetched videoPath:", videoPath);
+
+          if (videoPath) {
+            setUploadedVideos((prev) => [...prev, videoPath]);
+          }
+        } catch (error) {
+          console.error("Error fetching video:", error);
+        }
+      }, 3000); // 🔥 업로드 후 3초 후 요청 보내기
     } catch (error) {
-      console.error("Error uploading video:", error);
-      setError("Failed to upload video");
+      console.error("Error uploading or fetching video:", error);
+      setError("Failed to upload or fetch video");
     } finally {
       setUploading(false);
     }
@@ -152,7 +183,9 @@ export default function MusicSheetPage() {
         {showPreview && (
           <div className={style.preview}>
             <iframe
-              src={`${musicsheet.pdf_url}#toolbar=0`}
+              src={`https://drive.google.com/viewerng/viewer?embedded=true&url=${encodeURIComponent(
+                musicsheet.pdf_url
+              )}`}
               width="100%"
               height="600px"
               className={style.iframe}
