@@ -13,10 +13,12 @@ type MusicSheet = {
 
 export default function MusicSheetPage() {
   const [musicsheet, setMusicsheet] = useState<MusicSheet | null>(null);
+  const [uploadedVideos, setUploadedVideos] = useState<string[]>([]); // 업로드된 영상 URL 배열
   const [error, setError] = useState<string | null>(null);
   const [showPreview, setShowPreview] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const router = useRouter();
-  const { sheet_id } = router.query;
+  const { sheet_id } = router.query; // sheet_id를 URL 파라미터에서 가져옵니다.
 
   useEffect(() => {
     if (!sheet_id) return;
@@ -63,6 +65,37 @@ export default function MusicSheetPage() {
 
   const handlePreview = () => {
     setShowPreview(!showPreview);
+  };
+
+  const handleVideoUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    setUploading(true);
+
+    try {
+      const response = await axios.post(
+        `https://smini.site//musicsheets/${sheet_id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      setUploadedVideos((prev) => [...prev, response.data.video_path]); // 서버에서 반환된 영상 URL 추가
+    } catch (error) {
+      console.error("Error uploading video:", error);
+      setError("Failed to upload video");
+    } finally {
+      setUploading(false);
+    }
   };
 
   if (error) {
@@ -116,18 +149,43 @@ export default function MusicSheetPage() {
           </div>
         </div>
 
-        {showPreview && musicsheet.pdf_url && (
+        {showPreview && (
           <div className={style.preview}>
             <iframe
-              src={`https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(
-                musicsheet.pdf_url
-              )}`}
+              src={`${musicsheet.pdf_url}#toolbar=0`}
               width="100%"
               height="600px"
               className={style.iframe}
             ></iframe>
           </div>
         )}
+
+        <div className={style.uploadSection}>
+          <h3>Upload Your Performance</h3>
+          <input
+            type="file"
+            accept="video/*"
+            onChange={handleVideoUpload}
+            disabled={uploading}
+          />
+          {uploading && <p>Uploading...</p>}
+        </div>
+
+        <div className={style.videoList}>
+          <h3>Uploaded Videos</h3>
+          {uploadedVideos.length > 0 ? (
+            uploadedVideos.map((videoUrl, index) => (
+              <div key={index} className={style.videoItem}>
+                <video controls width="100%">
+                  <source src={videoUrl} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            ))
+          ) : (
+            <p>No videos uploaded yet.</p>
+          )}
+        </div>
       </div>
     </>
   );
