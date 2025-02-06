@@ -26,6 +26,122 @@
   margin-bottom: 30px;
 }
 
+.Searchbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px 16px; /* 좌우 패딩 추가 */
+  gap: 4px;
+
+  width: auto;
+  min-width: 400px;
+  min-height: 40px;
+  height: auto;
+
+  background: #e3d7ec;
+  border-radius: 28px;
+  font-size: 16px;
+  font-weight: bold;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.Searchbar input {
+  flex: 1; /* 입력 필드가 남은 공간을 차지하도록 설정 */
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  font-weight: bold;
+  padding-left: 12px; /* 입력 텍스트가 오른쪽에서 살짝 떨어지도록 설정 */
+  outline: none; /* 포커스 시 테두리 제거 */
+}
+
+.Searchbar .state {
+  /* state-layer */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4px;
+  gap: 4px;
+
+  width: 360px;
+  height: 56px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 1;
+}
+
+.Searchbar .state .supportcontent {
+  /* Content */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 10px;
+
+  width: 300px;
+  height: 48px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 1;
+}
+
+.Searchbar .state .supportcontent .supportingtext {
+  /* supporting-text */
+
+  width: 139px;
+  height: 24px;
+
+  /* M3/body/large */
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  /* identical to box height, or 150% */
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
+
+  /* M3/sys/light/on-surface-variant */
+  color: #49454f;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.Searchbar .state .TrailingElements {
+  /* Trailing-Elements */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0px;
+
+  width: 48px;
+  height: 48px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+}
+
 .list {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 한 줄에 4개 */

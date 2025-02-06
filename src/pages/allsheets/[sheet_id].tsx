@@ -80,7 +80,7 @@ export default function MusicSheetPage() {
 
     try {
       const response = await axios.post(
-        "https://smini.site/upload/video",
+        `https://smini.site//musicsheets/${sheet_id}`,
         formData,
         {
           headers: {
@@ -152,9 +152,7 @@ export default function MusicSheetPage() {
         {showPreview && (
           <div className={style.preview}>
             <iframe
-              src={`https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(
-                musicsheet.pdf_url
-              )}`}
+              src={`${musicsheet.pdf_url}#toolbar=0`}
               width="100%"
               height="600px"
               className={style.iframe}

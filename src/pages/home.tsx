@@ -72,6 +72,7 @@ export default function Home() {
         console.log(result);
         if (pdfUrl) {
           addPdfUrl(pdfUrl);
+          alert("변환이 완료되었습니다.");
         }
       } else {
         console.error("API request failed");
