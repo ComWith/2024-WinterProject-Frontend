@@ -40,7 +40,7 @@ export default function Login() {
     try {
       // 로그인 요청
       const response = await axios.post<LoginResponse>(
-        "http://52.78.134.101:5000/login",
+        "https://smini.site/login",
         {
           user_id,
           password,

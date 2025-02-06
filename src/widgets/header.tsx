@@ -12,7 +12,7 @@ export default function NavigationBar() {
     try {
       // 1. 서버에 refresh token 보내기 (로그아웃)
       const response = await axios.post(
-        "http://52.78.134.101:5000/logout", // 서버의 로그아웃 엔드포인트
+        "https://smini.site/logout", // 서버의 로그아웃 엔드포인트
         {},
         {
           withCredentials: true, // 쿠키에 저장된 refresh token을 자동으로 포함해서 보내기

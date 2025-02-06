@@ -11,23 +11,30 @@ type MusicSheet = {
   pdf_url: string;
 };
 
-type Props = {
-  musicsheet: MusicSheet | null;
-  error?: string;
-};
-
 export default function MusicSheetPage() {
   const [musicsheet, setMusicsheet] = useState<MusicSheet | null>(null);
+  const [uploadedVideos, setUploadedVideos] = useState<string[]>([]); // 업로드된 영상 URL 배열
   const [error, setError] = useState<string | null>(null);
   const [showPreview, setShowPreview] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const router = useRouter();
   const { sheet_id } = router.query; // sheet_id를 URL 파라미터에서 가져옵니다.
 
   useEffect(() => {
-    if (!sheet_id) return; // sheet_id가 없는 경우에는 요청하지 않도록 방어 처리
+    if (!sheet_id) return;
+
+    // 더미 데이터 처리
+    if (sheet_id === "dummy_id") {
+      setMusicsheet({
+        instrument: "Piano",
+        stage: "Beginner",
+        pdf_url: "/dummy.pdf",
+      });
+      return;
+    }
 
     const fetchMusicSheet = async () => {
-      const accessToken = localStorage.getItem("access_token"); // 클라이언트에서 access_token을 가져옵니다.
+      const accessToken = localStorage.getItem("access_token");
 
       if (!accessToken) {
         setError("No access token found.");
@@ -36,7 +43,7 @@ export default function MusicSheetPage() {
 
       try {
         const response = await axios.get<MusicSheet>(
-          `http://52.78.134.101:5000/musicsheets/${sheet_id}`,
+          `https://smini.site/musicsheets/${sheet_id}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -45,16 +52,6 @@ export default function MusicSheetPage() {
             withCredentials: true,
           }
         );
-
-        if (response.status === 401) {
-          setError("Unauthorized access");
-          return;
-        }
-
-        if (response.status === 404) {
-          setError("Music sheet not found");
-          return;
-        }
 
         setMusicsheet(response.data);
       } catch (error) {
@@ -68,6 +65,37 @@ export default function MusicSheetPage() {
 
   const handlePreview = () => {
     setShowPreview(!showPreview);
+  };
+
+  const handleVideoUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    setUploading(true);
+
+    try {
+      const response = await axios.post(
+        "https://smini.site/upload/video",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      setUploadedVideos((prev) => [...prev, response.data.video_path]); // 서버에서 반환된 영상 URL 추가
+    } catch (error) {
+      console.error("Error uploading video:", error);
+      setError("Failed to upload video");
+    } finally {
+      setUploading(false);
+    }
   };
 
   if (error) {
@@ -132,9 +160,31 @@ export default function MusicSheetPage() {
           </div>
         )}
 
-        <div className={style.additionalInfo}>
-          <p className={style.text}>Instrument: {musicsheet.instrument}</p>
-          <p className={style.text}>Stage: {musicsheet.stage}</p>
+        <div className={style.uploadSection}>
+          <h3>Upload Your Performance</h3>
+          <input
+            type="file"
+            accept="video/*"
+            onChange={handleVideoUpload}
+            disabled={uploading}
+          />
+          {uploading && <p>Uploading...</p>}
+        </div>
+
+        <div className={style.videoList}>
+          <h3>Uploaded Videos</h3>
+          {uploadedVideos.length > 0 ? (
+            uploadedVideos.map((videoUrl, index) => (
+              <div key={index} className={style.videoItem}>
+                <video controls width="100%">
+                  <source src={videoUrl} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            ))
+          ) : (
+            <p>No videos uploaded yet.</p>
+          )}
         </div>
       </div>
     </>
