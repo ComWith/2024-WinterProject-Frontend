@@ -26,6 +26,122 @@
   margin-bottom: 30px;
 }
 
+.Searchbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px 16px; /* 좌우 패딩 추가 */
+  gap: 4px;
+
+  width: auto;
+  min-width: 400px;
+  min-height: 40px;
+  height: auto;
+
+  background: #e3d7ec;
+  border-radius: 28px;
+  font-size: 16px;
+  font-weight: bold;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.Searchbar input {
+  flex: 1; /* 입력 필드가 남은 공간을 차지하도록 설정 */
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  font-weight: bold;
+  padding-left: 12px; /* 입력 텍스트가 오른쪽에서 살짝 떨어지도록 설정 */
+  outline: none; /* 포커스 시 테두리 제거 */
+}
+
+.Searchbar .state {
+  /* state-layer */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4px;
+  gap: 4px;
+
+  width: 360px;
+  height: 56px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 1;
+}
+
+.Searchbar .state .supportcontent {
+  /* Content */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 10px;
+
+  width: 300px;
+  height: 48px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 1;
+}
+
+.Searchbar .state .supportcontent .supportingtext {
+  /* supporting-text */
+
+  width: 139px;
+  height: 24px;
+
+  /* M3/body/large */
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  /* identical to box height, or 150% */
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
+
+  /* M3/sys/light/on-surface-variant */
+  color: #49454f;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.Searchbar .state .TrailingElements {
+  /* Trailing-Elements */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0px;
+
+  width: 48px;
+  height: 48px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+}
+
 .list {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 한 줄에 4개 */
@@ -160,37 +276,4 @@
 .pageInfo {
   font-size: 1rem;
   color: #666;
-}
-
-/* 기본 input 스타일 */
-.input {
-  padding: 12px 15px;
-  font-size: 16px;
-  border-radius: 8px;
-  border: 2px solid #ddd;
-  background-color: #f9f9f9;
-  width: auto; /* 원하는 크기 조정 가능 */
-  height: auto;
-  box-sizing: border-box; /* padding 포함한 크기 설정 */
-  transition: all 0.3s ease; /* 상태 변화 시 부드러운 전환 효과 */
-}
-
-/* 포커스 시 입력창 강조 */
-.input:focus {
-  outline: none;
-  border-color: #4caf50; /* 초록색 테두리 */
-  background-color: #eaffea; /* 연한 초록색 배경 */
-  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); /* 초록색 그림자 */
-}
-
-/* 마우스 hover 시 변화 */
-.input:hover {
-  border-color: #888; /* 회색 테두리 */
-  background-color: #f1f1f1; /* 연한 회색 배경 */
-}
-
-/* placeholder 스타일 */
-.input::placeholder {
-  color: #888; /* 회색 */
-  font-style: italic; /* 이탤릭체 */
 }
