@@ -45,7 +45,7 @@ export default function AllSheet() {
 
       try {
         const response = await fetch(
-          `http://52.78.134.101:5000/users/${user_id}/musicsheets`,
+          `https://smini.site/users/${user_id}/musicsheets`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
