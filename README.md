@@ -1,6 +1,6 @@
 # 2024-WinterProject-Frontend
 
-# (웹서비스 이름)
+# NotaNova
 > **인천대학교 정보통신공학과 프로그래밍 소모임 ComWith** <br/> **개발기간: 2024.12.28 ~
 
 ## 배포 주소
